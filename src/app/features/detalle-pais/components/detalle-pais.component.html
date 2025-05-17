@@ -1,58 +1,66 @@
-<div class="container mx-auto p-4">
-  <div class="bg-white rounded-lg shadow-lg p-6">
-    <div class="flex items-center justify-between mb-6">
-      <h1 class="text-2xl font-bold">Detalle del País</h1>
-      <button 
-        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-        (click)="volver()">
-        Volver
-      </button>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="space-y-4">
-        <div>
-          <h2 class="text-lg font-semibold mb-2">Información General</h2>
-          <div class="space-y-2">
-            <p><span class="font-medium">Capital:</span> {{pais?.capital}}</p>
-            <p><span class="font-medium">Población:</span> {{pais?.population | number}}</p>
-            <p><span class="font-medium">Región:</span> {{pais?.region}}</p>
-            <p><span class="font-medium">Subregión:</span> {{pais?.subregion}}</p>
-          </div>
-        </div>
-
-        <div>
-          <h2 class="text-lg font-semibold mb-2">Idiomas</h2>
-          <div class="flex flex-wrap gap-2">
-            <span 
-              *ngFor="let idioma of pais?.languages | keyvalue"
-              class="bg-gray-100 px-3 py-1 rounded-full text-sm">
-              {{idioma.value}}
-            </span>
-          </div>
-        </div>
+@if (pais$ | async; as pais) {
+  <div class="container mx-auto p-4">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold">{{ pais.name.common }}</h1>
+        <button 
+          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          (click)="volver()">
+          Volver
+        </button>
       </div>
 
-      <div class="space-y-4">
-        <div>
-          <h2 class="text-lg font-semibold mb-2">Bandera</h2>
-          <img 
-            [src]="pais?.flags?.svg" 
-            [alt]="'Bandera de ' + pais?.name?.common"
-            class="w-full max-w-md rounded-lg shadow">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <div>
+            <h2 class="text-lg font-semibold mb-2">Información General</h2>
+            <div class="space-y-2">
+              <p><span class="font-medium">Capital:</span> {{pais.capital}}</p>
+              <p><span class="font-medium">Población:</span> {{pais.population | number}}</p>
+              <p><span class="font-medium">Región:</span> {{pais.region}}</p>
+              <p><span class="font-medium">Subregión:</span> {{pais.subregion}}</p>
+            </div>
+          </div>
+
+          <div>
+            <h2 class="text-lg font-semibold mb-2">Idiomas</h2>
+            <div class="flex flex-wrap gap-2">
+              @for(idioma of pais.languages | keyvalue; track idioma.key) {
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">
+                  {{idioma.value}}
+                </span>
+              }
+            </div>
+          </div>
         </div>
 
-        <div>
-          <h2 class="text-lg font-semibold mb-2">Monedas</h2>
-          <div class="flex flex-wrap gap-2">
-            <span 
-              *ngFor="let moneda of pais?.currencies | keyvalue"
-              class="bg-gray-100 px-3 py-1 rounded-full text-sm">
-              {{moneda.value.name}} ({{moneda.value.symbol}})
-            </span>
+        <div class="space-y-4">
+          <div>
+            <h2 class="text-lg font-semibold mb-2">Bandera</h2>
+            <img 
+              [src]="pais.flags.svg" 
+              [alt]="'Bandera de ' + pais.name.common"
+              class="w-full max-w-md rounded-lg shadow"
+              loading="lazy">
+          </div>
+
+          <div>
+            <h2 class="text-lg font-semibold mb-2">Monedas</h2>
+            <div class="flex flex-wrap gap-2">
+              @for(moneda of pais.currencies | keyvalue; track moneda.key) {
+                <span class="bg-gray-100 px-3 py-1 rounded-full text-sm">
+                  {{moneda.value.name}} ({{moneda.value.symbol}})
+                </span>
+              }
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div> 
+} @else {
+  <div class="container mx-auto p-4 text-center">
+    <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+    <p class="mt-4 text-lg">Cargando información del país...</p>
+  </div>
+} 

@@ -5,9 +5,16 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <main class="app-container">
+      <router-outlet />
+    </main>
+  `,
+  styles: [`
+    .app-container {
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+  `]
 })
-export class AppComponent {
-  title = 'countries-app';
-}
+export class AppComponent {}
