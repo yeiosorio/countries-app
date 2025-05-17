@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+.nav-link {
+  &.active {
+    @apply text-blue-600;
+  }
+  
+  &:hover {
+    @apply text-blue-500;
+  }
+} 

@@ -1,0 +1,18 @@
+<div class="min-h-screen bg-gray-100">
+  <nav class="bg-white shadow-lg">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <div class="text-xl font-bold">Countries App</div>
+        <div class="space-x-4">
+          <a routerLink="/listado" routerLinkActive="text-blue-600" class="hover:text-blue-500">Listado</a>
+          <a routerLink="/detalle-pais" routerLinkActive="text-blue-600" class="hover:text-blue-500">Detalle</a>
+          <a routerLink="/administracion" routerLinkActive="text-blue-600" class="hover:text-blue-500">Administración</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <main class="container mx-auto py-8">
+    <router-outlet></router-outlet>
+  </main>
+</div> 
