@@ -1,9 +1,22 @@
-<div class="search-container">
+<div class="search-container" role="search">
+  <label for="country-search" class="visually-hidden">Buscar país</label>
   <input
-    type="text"
+    id="country-search"
+    type="search"
     class="search-input"
     [placeholder]="placeholder"
     [(ngModel)]="searchTerm"
     (ngModelChange)="onInputChange($event)"
+    (keyup.enter)="onEnterPress()"
+    aria-label="Buscar país por nombre"
+    [attr.aria-invalid]="searchTerm().length > 0 && searchTerm().length < 3"
+    autocomplete="off"
   />
+  <span 
+    class="validation-message" 
+    role="alert"
+    *ngIf="searchTerm().length > 0 && searchTerm().length < 3"
+  >
+    Ingresa al menos 3 caracteres
+  </span>
 </div> 
