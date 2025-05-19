@@ -1,14 +1,12 @@
 <div class="countries-section">
-  <header>
-    <h2 class="section-title">Listado de Países</h2>
-  </header>
-
-  <div class="filters">
+  <div class="search-bar-wrapper">
     <app-search-box
       (onSearch)="onSearch($event)"
       placeholder="Buscar país por nombre..."
     ></app-search-box>
+  </div>
 
+  <div class="filters">
     <app-region-filter
       (onRegionChange)="onRegionChange($event)"
     ></app-region-filter>

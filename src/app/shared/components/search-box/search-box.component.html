@@ -1,4 +1,4 @@
-<div class="search-container" role="search">
+<form class="search-container" role="search" (submit)="$event.preventDefault(); onEnterPress()">
   <label for="country-search" class="visually-hidden">Buscar país</label>
   <input
     id="country-search"
@@ -6,17 +6,24 @@
     class="search-input"
     [placeholder]="placeholder"
     [(ngModel)]="searchTerm"
+    [ngModelOptions]="{standalone: true}"
     (ngModelChange)="onInputChange($event)"
     (keyup.enter)="onEnterPress()"
     aria-label="Buscar país por nombre"
-    [attr.aria-invalid]="searchTerm().length > 0 && searchTerm().length < 3"
+    [attr.aria-invalid]="searchTerm.length > 0 && searchTerm.length < 3"
     autocomplete="off"
   />
+  <button type="submit" class="search-btn" aria-label="Buscar">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  </button>
   <span 
     class="validation-message" 
     role="alert"
-    *ngIf="searchTerm().length > 0 && searchTerm().length < 3"
+    *ngIf="searchTerm.length > 0 && searchTerm.length < 3"
   >
     Ingresa al menos 3 caracteres
   </span>
-</div> 
+</form> 

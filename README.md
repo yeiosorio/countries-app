@@ -1,59 +1,76 @@
 # CountriesApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+Este proyecto fue generado usando [Angular CLI](https://github.com/angular/angular-cli) versión 19.2.12.
 
-## Development server
+## Características principales
+- Búsqueda de países por nombre con autocompletado y validación
+- Filtro por región
+- Listado virtualizado para alto rendimiento
+- Gestión de favoritos persistente
+- Diseño responsivo y moderno
+- Accesibilidad básica (a11y): roles, labels, navegación por teclado
+- Manejo de estados de carga y error
+- Lazy loading de vistas
+- Uso de signals para estado reactivo
+- Componentes standalone y reutilizables
+- Optimización de imágenes con NgOptimizedImage
 
-To start a local development server, run:
-
-```bash
-ng serve
+## Estructura del proyecto
+```
+├── src/
+│   ├── app/
+│   │   ├── core/                # Servicios y lógica central
+│   │   ├── features/            # Funcionalidades principales (listado, detalle, administración)
+│   │   ├── shared/              # Componentes y utilidades compartidas
+│   │   └── layout/              # Layout principal y navegación
+│   ├── assets/                  # Recursos estáticos
+│   └── environments/            # Configuración de entornos
+├── angular.json                 # Configuración Angular
+├── package.json                 # Dependencias y scripts
+└── README.md                    # Documentación
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Instalación y ejecución
+1. Clona el repositorio:
+   ```bash
+   git clone <repo-url>
+   cd countries-app
+   ```
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+3. Inicia el servidor de desarrollo:
+   ```bash
+   ng serve
+   ```
+4. Abre [http://localhost:4200](http://localhost:4200) en tu navegador.
 
-## Code scaffolding
+## Patrones y buenas prácticas
+- **Componentes standalone** para modularidad y reutilización
+- **Signals** para manejo reactivo del estado
+- **Inyección directa con `inject`** en servicios/componentes
+- **Estructura de carpetas por feature**
+- **Nombres de archivos en kebab-case**
+- **Tipado estricto con interfaces**
+- **Accesibilidad básica (a11y)**: roles, labels, navegación por teclado
+- **Optimización de rendimiento**: virtual scroll, trackBy, NgOptimizedImage
+- **Lazy loading** de vistas
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Versiones
+- Angular: 19.2.12
+- Node: >=18.x
+- RxJS: ^7.x
 
-```bash
-ng generate component component-name
-```
+## Testing
+- Ejecuta pruebas unitarias:
+  ```bash
+  ng test
+  ```
+- Ejecuta pruebas end-to-end:
+  ```bash
+  ng e2e
+  ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Recursos adicionales
+- [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
