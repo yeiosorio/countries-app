@@ -74,3 +74,51 @@ Este proyecto fue generado usando [Angular CLI](https://github.com/angular/angul
 
 ## Recursos adicionales
 - [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
+
+## Integración Continua (CI)
+
+Este proyecto utiliza **GitHub Actions** para asegurar la calidad y confiabilidad del código en cada push o pull request a las ramas `main` o `master`.
+
+El pipeline ejecuta automáticamente:
+- `ng lint` para análisis de estilo y buenas prácticas.
+- `ng test --watch=false --code-coverage` para ejecutar pruebas unitarias y generar reporte de cobertura.
+- `ng build --configuration=production` para compilar la aplicación en modo producción.
+
+El workflow se encuentra en `.github/workflows/ci.yml` y luce así:
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint || ng lint
+
+      - name: Test (con cobertura)
+        run: npm run test -- --watch=false --code-coverage || ng test --watch=false --code-coverage
+
+      - name: Build producción
+        run: npm run build -- --configuration=production || ng build --configuration=production
+```
+
+Esto garantiza que solo se integren cambios que pasan las validaciones de calidad, pruebas y build.

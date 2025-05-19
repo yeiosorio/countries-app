@@ -207,10 +207,66 @@ div.loading {
   width: 100%;
   margin-bottom: 1.5rem;
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: center;
+  align-items: center;
 }
 
 app-search-box {
-  width: 100%;
+  flex: 2 1 320px;
+  min-width: 220px;
   max-width: 600px;
+}
+
+.region-filter-drop {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 999px;
+  padding: 0 0 0 1rem;
+  margin: 0 0 0 1rem;
+  min-width: unset;
+  max-width: unset;
+  height: 48px;
+}
+
+.region-filter-drop label {
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  color: #444;
+  white-space: nowrap;
+}
+
+.region-filter-drop select {
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  min-width: 160px;
+  max-width: 220px;
+  height: 40px;
+}
+
+@media (max-width: 768px) {
+  .search-bar-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  app-search-box, .region-filter-drop {
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+    margin: 0;
+  }
+  .region-filter-drop {
+    margin: 0;
+    padding: 0.5rem 0 0 0;
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+  }
 } 
