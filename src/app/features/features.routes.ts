@@ -1,24 +1,19 @@
 import { Routes } from '@angular/router';
-import { ListadoComponent } from './listado/components/listado.component';
-import { AdministracionComponent } from './administracion/components/administracion.component';
-import { DetallePaisComponent } from './detalle-pais/components/detalle-pais.component';
 
 export const FEATURES_ROUTES: Routes = [
   {
     path: '',
-    component: ListadoComponent
+    loadComponent: () => import('./listado/components/listado.component')
+      .then(m => m.ListadoComponent)
   },
   {
-    path: 'detalle-pais/:id',
-    component: DetallePaisComponent
+    path: 'country/:id',
+    loadComponent: () => import('./detalle/components/detalle.component')
+      .then(m => m.DetalleComponent)
   },
   {
     path: 'administracion',
-    component: AdministracionComponent
-  },
-  {
-    path: '',
-    redirectTo: 'listado',
-    pathMatch: 'full'
+    loadComponent: () => import('./administracion/components/administracion.component')
+      .then(m => m.AdministracionComponent)
   }
 ]; 

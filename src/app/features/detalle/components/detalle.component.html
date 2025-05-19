@@ -1,0 +1,86 @@
+<div class="container">
+  @if (country) {
+    <div class="flag-container">
+      <img 
+        [src]="country.flags.svg" 
+        [alt]="country.flags.alt || country.name.common + ' bandera'"
+      >
+      <button 
+        routerLink="/listado"
+        class="back-button"
+      >
+        Volver
+      </button>
+    </div>
+    
+    <div class="country-info">
+      <h1 class="country-name">{{ country.name.common }}</h1>
+      
+      <div class="info-section">
+        <h2>Información General</h2>
+        <dl>
+          <div>
+            <dt>Nombre Oficial</dt>
+            <dd>{{ country.name.official }}</dd>
+          </div>
+          <div>
+            <dt>Capital</dt>
+            <dd>{{ country.capital?.join(', ') || 'N/A' }}</dd>
+          </div>
+          <div>
+            <dt>Población</dt>
+            <dd>{{ country.population | number }}</dd>
+          </div>
+          <div>
+            <dt>Región</dt>
+            <dd>{{ country.region }}</dd>
+          </div>
+          <div>
+            <dt>Subregión</dt>
+            <dd>{{ country.subregion || 'N/A' }}</dd>
+          </div>
+        </dl>
+      </div>
+      
+      <div class="info-section">
+        <h2>Detalles Adicionales</h2>
+        <dl>
+          <div>
+            <dt>Idiomas</dt>
+            <dd>{{ getLanguages(country.languages) }}</dd>
+          </div>
+          <div>
+            <dt>Monedas</dt>
+            <dd>{{ getCurrencies(country.currencies) }}</dd>
+          </div>
+          <div>
+            <dt>Zona Horaria</dt>
+            <dd>{{ country.timezones?.join(', ') }}</dd>
+          </div>
+          <div>
+            <dt>Dominio</dt>
+            <dd>{{ country.tld?.join(', ') || 'N/A' }}</dd>
+          </div>
+        </dl>
+      </div>
+      
+      @if (country.borders && country.borders.length > 0) {
+        <div class="borders-section">
+          <h2>Países Fronterizos</h2>
+          <div class="borders-grid">
+            @for (border of country.borders; track border) {
+              <a [routerLink]="['listado/country', border]">
+                {{ border }}
+              </a>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Cargando información del país...</p>
+    </div>
+  }
+</div> 

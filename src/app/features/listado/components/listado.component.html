@@ -1,10 +1,7 @@
-<div class="container mx-auto p-4">
-  <h1 class="text-2xl font-bold mb-4">Listado de Países</h1>
-  <!-- Aquí irá el contenido del listado -->
-</div>
-
-<section class="countries-section" role="region" aria-label="Lista de países">
-  <h1 class="section-title">Listado de Países</h1>
+<div class="countries-section">
+  <header>
+    <h2 class="section-title">Listado de Países</h2>
+  </header>
 
   <div class="filters">
     <app-search-box
@@ -19,63 +16,47 @@
 
   <!-- Estado de carga -->
   @if (isLoading()) {
-    <div class="loading-state" role="status">
-      <span class="spinner"></span>
+    <div class="loading-state">
+      <div class="spinner"></div>
       <p>Cargando países...</p>
     </div>
   }
 
   <!-- Estado de error -->
   @if (error()) {
-    <div class="error-state" role="alert">
+    <div class="error-state">
       <p>{{ error() }}</p>
-      <button (click)="retryLoad()" class="retry-button">
-        Intentar nuevamente
-      </button>
+      <button (click)="retryLoad()">Intentar nuevamente</button>
     </div>
   }
 
   <!-- Resultados -->
   @if (!isLoading() && !error()) {
-    <div class="results-info" role="status" aria-live="polite">
-      {{ filteredCountries().length }} países encontrados
+    <div class="results-info">
+      <span>{{ filteredCountries().length }} países encontrados</span>
     </div>
-    <div #countriesList class="countries-list" role="list">
-      @for (country of filteredCountries(); track country.cca3) {
-        <article class="country-card" role="listitem">
-          <a
-            [routerLink]="['/country', country.cca3]"
-            class="country-link"
-            [attr.aria-label]="'Ver detalles de ' + country.name.common"
-          >
-            <img
-              [src]="country.flags.svg"
-              [alt]="country.flags.alt || country.name.common + ' bandera'"
-              class="country-flag"
-              loading="lazy"
-              width="320"
-              height="160"
-            />
-            <div class="country-info">
-              <h2 class="country-name">{{ country.name.common }}</h2>
-              <dl class="country-details">
-                <div class="detail-item">
-                  <dt>Población:</dt>
-                  <dd>{{ country.population | number }}</dd>
-                </div>
-                <div class="detail-item">
-                  <dt>Región:</dt>
-                  <dd>{{ country.region }}</dd>
-                </div>
-                <div class="detail-item">
-                  <dt>Capital:</dt>
-                  <dd>{{ country.capital?.[0] ?? "N/A" }}</dd>
-                </div>
-              </dl>
+
+    @if (useVirtualScroll()) {
+      <cdk-virtual-scroll-viewport
+        [itemSize]="itemSize"
+        class="virtual-scroll-viewport"
+      >
+        <div class="countries-grid">
+          @for (country of filteredCountries(); track country.cca3) {
+            <div [class.loading]="!country">
+              <app-country-card [country]="country"></app-country-card>
             </div>
-          </a>
-        </article>
-      }
-    </div>
+          }
+        </div>
+      </cdk-virtual-scroll-viewport>
+    } @else {
+      <div class="countries-grid">
+        @for (country of filteredCountries(); track country.cca3) {
+          <div [class.loading]="!country">
+            <app-country-card [country]="country"></app-country-card>
+          </div>
+        }
+      </div>
+    }
   }
-</section>
+</div>

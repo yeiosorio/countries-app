@@ -29,4 +29,6 @@ export interface Country {
     };
   };
   borders?: string[];
+  timezones: string[];
+  tld: string[];
 } 

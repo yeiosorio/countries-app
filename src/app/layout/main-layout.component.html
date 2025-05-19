@@ -1,13 +1,10 @@
 <div class="min-h-screen bg-gray-100">
-  <nav class="bg-white shadow-lg">
-    <div class="container mx-auto px-4">
-      <div class="flex justify-between items-center py-4">
-        <div class="text-xl font-bold">Countries App</div>
-        <div class="space-x-4">
-          <a routerLink="/listado" routerLinkActive="text-blue-600" class="hover:text-blue-500">Listado</a>
-          <a routerLink="/detalle-pais" routerLinkActive="text-blue-600" class="hover:text-blue-500">Detalle</a>
-          <a routerLink="/administracion" routerLinkActive="text-blue-600" class="hover:text-blue-500">Administración</a>
-        </div>
+  <nav class="main-navbar">
+    <div class="navbar-container">
+      <div class="navbar-title">🌍 Countries App</div>
+      <div class="navbar-links">
+        <a routerLink="listado" routerLinkActive="active" class="nav-link">Listado</a>
+        <a routerLink="administracion" routerLinkActive="active" class="nav-link">Administración</a>
       </div>
     </div>
   </nav>
